@@ -1,0 +1,8 @@
+Average time for quicksort with size 62500: 4.08
+Average time for selection sort with size 62500: 874.2
+Average time for quicksort with size 125000: 8.44
+Average time for selection sort with size 125000: 3434.86
+Average time for quicksort with size 250000: 24.4
+Average time for selection sort with size 250000: 13789.5
+Average time for quicksort with size 375000: 32.94
+Average time for selection sort with size 375000: 30865.98
