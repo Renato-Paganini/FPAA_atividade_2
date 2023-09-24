@@ -1,4 +1,3 @@
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,40 +7,43 @@ import java.util.Random;
 public class QuickSortTest {
     public static void main(String[] args) {
         int size = 10000;
-        int[] randomArray = new int[size];
-        int[] sortedArray = new int[size];
+        int numTests = 10;
+        int[][] randomArrays = new int[numTests][size];
+        int[][] sortedArrays = new int[numTests][size];
         Random rand = new Random();
 
         // Preenche os vetores
-        for (int i = 0; i < size; i++) {
-            randomArray[i] = rand.nextInt(size);
-            sortedArray[i] = i;
+        for (int i = 0; i < numTests; i++) {
+            for (int j = 0; j < size; j++) {
+                randomArrays[i][j] = rand.nextInt(size);
+                sortedArrays[i][j] = j;
+            }
         }
 
         long startTime, endTime;
         long totalRandomTime = 0, totalSortedTime = 0;
 
-        // Executa o QuickSort 10 vezes em cada vetor e acumula o tempo total
-        for (int i = 0; i < 10; i++) {
+        // Executa o QuickSort em cada vetor e acumula o tempo total
+        for (int i = 0; i < numTests; i++) {
             startTime = System.currentTimeMillis();
-            quickSort(randomArray, 0, size - 1);
+            quickSort(randomArrays[i], 0, size - 1);
             endTime = System.currentTimeMillis();
             totalRandomTime += endTime - startTime;
 
             startTime = System.currentTimeMillis();
-            quickSort(sortedArray, 0, size - 1);
+            quickSort(sortedArrays[i], 0, size - 1);
             endTime = System.currentTimeMillis();
             totalSortedTime += endTime - startTime;
         }
 
         // Calcula os tempos médios em milissegundos
-        double averageRandomTime = (double) totalRandomTime / 10;
-        double averageSortedTime = (double) totalSortedTime / 10;
+        double averageRandomTime = (double) totalRandomTime / numTests;
+        double averageSortedTime = (double) totalSortedTime / numTests;
 
         // Escreve os resultados em um arquivo
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("resultado_quicksort.txt"))) {
-            writer.write("Tempo medio para vetor aleatório: " + averageRandomTime + " ms\n");
-            writer.write("Tempo medio para vetor ordenado: " + averageSortedTime + " ms\n");
+            writer.write("Tempo medio para vetores aleatorios: " + averageRandomTime + " ms\n");
+            writer.write("Tempo medio para vetores ordenados: " + averageSortedTime + " ms\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
