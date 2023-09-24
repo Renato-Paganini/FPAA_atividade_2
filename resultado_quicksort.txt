@@ -1,0 +1,2 @@
+Tempo medio para vetor aleatório: 51.1 ms
+Tempo medio para vetor ordenado: 61.5 ms
